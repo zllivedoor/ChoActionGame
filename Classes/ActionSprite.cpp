@@ -57,17 +57,17 @@ bool ActionSprite::_changeState(ActionState state)
 {
     bool ret = false;
 
-    // ¾«ÁéÒÑ¾­±»»÷µ¹£¨Game Over£©£¬¾Í²»ÄÜÔÙ³ö·¢ÆäËû¶¯×÷ÁË£¡
+    // Ã¦Â´Â¡Ãˆâ€œâ€”Ã¦â‰ Â±ÂªÂªËœÂµÏ€Â£Â®Game OverÂ£Â©Â£Â¨Ã¦Ã•â‰¤ÂªÆ’â€¹â€˜Å¸â‰¥Ë†âˆ‘Â¢âˆ†â€°Ã€Ëšâˆ‚Ã˜â—ŠËœÂ¡Ã€Â£Â°
     if (_currentState == ACTION_STATE_KNOCKOUT) {
         goto change_state_failed;
     }
     
-    // ¾«ÁéÒÑ¾­´¦ÓÚÒª¸Ä±äµÄ×´Ì¬£¬¾ÍÃ»±ØÒªÔÚ¸Ä±äÁË£¡
+    // Ã¦Â´Â¡Ãˆâ€œâ€”Ã¦â‰ Â¥Â¶â€â„â€œâ„¢âˆÆ’Â±â€°ÂµÆ’â—ŠÂ¥ÃƒÂ¨Â£Â¨Ã¦Ã•âˆšÂªÂ±Ã¿â€œâ„¢â€˜â„âˆÆ’Â±â€°Â¡Ã€Â£Â°
     if (_currentState == state) {
         goto change_state_failed;
     }
 
-    // ¸Ä±ä¶¯×÷Ö®Ç°£¬ÏÈÍ£Ö¹ËùÓÐ¶¯×÷
+    // âˆÆ’Â±â€°âˆ‚Ã˜â—ŠËœÃ·Ã†Â«âˆžÂ£Â¨Å“Â»Ã•Â£Ã·Ï€Ã€Ë˜â€â€“âˆ‚Ã˜â—ŠËœ
     this->stopAllActions();
 
     _currentState = state;
@@ -79,13 +79,13 @@ change_state_failed:
 
 Animation *ActionSprite::createAnimation(const char *fmt, int count, float fps)
 {
-    Array *frames = Array::createWithCapacity(count);
+    Vector<SpriteFrame*> frames;
     int i = 0;
 
     for (i = 0; i < count; i++) {
         const char *png = String::createWithFormat(fmt, i)->getCString();
         SpriteFrame *frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(png);
-        frames->addObject(frame);
+        frames.pushBack(frame);
     }
 
     return Animation::createWithSpriteFrames(frames, 1 / fps);
